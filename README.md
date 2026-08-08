@@ -2,21 +2,20 @@
 
 Ammunae facilitates the creation of **AI-generated, Uldum-compatible 3D models**, from an idea through a validated glTF or GLB asset.
 
-The project defines the production pipeline, organizes its artifacts and records, maintains reusable resources, and develops tools that make any stage of the process easier or more reliable.
+The project defines the production pipeline, organizes useful artifacts, maintains reusable resources, and develops tools that make any stage of the process easier or more reliable.
 
 Ammunae is at an early stage. Its contracts, workflows, and tools will be developed and refined as the production process is investigated.
 
 ## Scope
 
-A model project begins with an **idea from the user**. It does not require an existing model, image, rig, animation, or other source asset.
+A model project begins with an **idea from the user**. It does not require an existing model, image, rig, animation, or other source asset, and the idea does not need to be saved as a formal document.
 
-The idea should first be captured as a model brief that expresses the intended subject, appearance, function, and relevant constraints. If the user has visual references, they may use them as part of the creative direction given to an external generation service; they are not a separate required input to Ammunae.
+If the user has visual references, they may use them as part of the creative direction given to an external generation service; they are not a separate required input to Ammunae.
 
 From that starting point, Ammunae covers the complete production process:
 
 ```text
 Idea
-→ model brief
 → concept art
 → generated 3D model
 → mesh and material preparation
@@ -28,11 +27,7 @@ Idea
 
 Concept art, generated meshes, prompts, rigs, animations, and other files encountered after the idea are **production artifacts**. They may become the input to a later pipeline stage, but they are created, selected, imported, or reused within the process rather than being prerequisites for starting it.
 
-A completed model project should produce:
-
-- a validated glTF or GLB model compatible with Uldum;
-- the important prompts, settings, decisions, and validation results needed to understand, revisit, or improve its production;
-- organized working artifacts worth retaining, such as concept art and editable source files.
+A completed model project should produce a validated glTF or GLB model compatible with Uldum. Selected concept art, useful candidates, editable source assets, and other working files may be retained when they continue to have value. Ammunae does not require a complete production history.
 
 Ammunae covers all model categories supported by Uldum's glTF contract. Individual paths through the pipeline may differ for static, skinned, and animated models.
 
@@ -42,9 +37,8 @@ Ammunae is responsible for facilitating the whole idea-to-model process. This in
 
 - defining and documenting the production pipeline;
 - identifying the inputs, outputs, decisions, and validation checks at each stage;
-- prescribing a consistent workspace for each model and its production artifacts;
-- preserving important AI prompts, generation settings, tool or service information, selected results, and consequential decisions;
-- providing reusable prompt templates and generation guidance;
+- prescribing a lightweight workspace for worlds, models, and useful production artifacts;
+- providing reusable prompt fragments and generation guidance;
 - investigating workflows for concept-art and 3D-model generation;
 - supporting mesh cleanup, face reduction, orientation, scale, topology, UV, texture, and material preparation;
 - defining compatibility contracts for models, skeletons, animations, attachments, and exports;
@@ -53,7 +47,7 @@ Ammunae is responsible for facilitating the whole idea-to-model process. This in
 - validating Uldum compatibility and enabling repeatable glTF export;
 - building scripts, validators, integrations, templates, or any other tools that facilitate the process.
 
-The project is not limited to a predetermined toolset. It may document and coordinate external software and online AI services, or add its own tools where doing so improves the workflow. Ammunae owns the process, organization, records, and compatibility requirements; it does not need to host every generation or authoring operation itself.
+The project is not limited to a predetermined toolset. It may document and coordinate external software and online AI services, or add its own tools where doing so improves the workflow. Ammunae owns the process, organization, and compatibility requirements; it does not need to host every generation or authoring operation itself.
 
 ## Human Direction and Automation
 
@@ -61,37 +55,32 @@ For now, the pipeline is human-directed. AI and automation assist generation and
 
 This is the current operating model, not a permanent limit. Ammunae should progressively automate suitable stages and may eventually provide an agent that orchestrates much or all of the pipeline. Automation should grow from a documented and understood process rather than hide an undefined one.
 
-## Project Workspaces and Production Records
+## Worlds and Model Workspaces
 
-Ammunae should define a standard on-disk workspace for every model project. The structure should provide clear places for artifacts such as:
+Production assets are divided into **worlds**. A world groups models that share a visual language, such as concept-art direction, mesh design, materials, and texture style. It may also hold prompt fragments and resources useful across its models.
 
-- the model brief and notes;
-- prompts and generation records;
-- concept art;
-- generated 3D candidates;
-- editable mesh and material source files;
-- textures;
-- rigs and skinning work;
-- animations;
-- exported models;
-- validation reports.
+Each model has a folder inside its world, but Ammunae does not prescribe that folder's internal structure. Files should be kept when they remain useful, not merely to preserve a complete history. Failed or redundant candidates and model-specific prompts may be discarded.
 
-These artifacts are part of the model's production history even when they are not shipped to Uldum. In particular, selected concept art and important prompts should be retained because they capture intent and explain later choices.
+When part of a prompt proves reusable, it should be extracted before the model-specific prompt is discarded:
 
-The exact workspace layout, file conventions, and production-record format will be defined with the pipeline documentation.
+- world-specific style guidance belongs to that world;
+- world-agnostic guidance may be added to the repository in a location appropriate to the material that actually exists.
+
+The detailed ownership rules and local layout are defined in [the workspace contract](docs/workspace.md).
 
 ## Repository and Asset Policy
 
-Git should track the parts of Ammunae that benefit from versioning and sharing, including:
+Actual world workspaces live under `assets/` and remain outside Git. This includes each world's style material, shared resources, models, and production files. The sole tracked exception beneath `assets/` is `assets/template/`, which can be copied to start a world.
+
+Git tracks only world-agnostic parts of Ammunae, including:
 
 - project documentation and compatibility contracts;
-- pipeline guidance;
-- reusable prompt templates;
+- pipeline guidance and reusable prompt fragments;
 - tools and scripts;
-- workspace scaffolding, manifests, and README files;
-- reusable shared assets when appropriate, including canonical rigs and animation libraries.
+- workspace templates;
+- reusable resources that are genuinely useful across worlds.
 
-Per-model generated and working assets should normally remain outside Git because they may be numerous, large, tool-specific, or easy to regenerate. Ammunae should still provide tracked folder scaffolding and instructions so those local assets follow a consistent organization.
+The repository's organization for world-agnostic work should grow from the pipeline and the material that actually exists. It should not create one folder per assumed stage in advance. Small related artifacts may stay together, while substantial areas may receive their own directories when justified. World-specific resources remain with their world even when they are shared by several models.
 
 ## Uldum Compatibility
 
@@ -115,7 +104,7 @@ The Uldum model-format specification is Ammunae's engine-facing compatibility co
 
 ## Shared Rigs and Animations
 
-Ammunae should maintain reusable rigs and animation libraries.
+Ammunae should maintain reusable rigs and animation libraries where reuse proves valuable.
 
 Different meshes can share animations when they follow a compatible skeleton contract. Mesh shape, topology, materials, and skin weights may differ; the relevant rig structure must remain compatible.
 
@@ -130,7 +119,7 @@ Animations may be:
 
 ## Classic Warcraft III Animation Adoption
 
-Classic Warcraft III unit animations are an important potential source for Ammunae's animation library.
+Classic Warcraft III unit animations are an important potential source for Ammunae's animation resources.
 
 The intended work is:
 

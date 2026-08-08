@@ -1,2 +1,7 @@
 # Claude Code
 .claude/
+
+# Local world workspaces and production assets
+/assets/*
+!/assets/template/
+!/assets/template/**
