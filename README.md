@@ -85,7 +85,7 @@ The repository's organization for world-agnostic work should grow from the pipel
 
 ## Uldum Compatibility
 
-[Uldum](model-format.md) is a unit-centric game engine inspired by Warcraft III, built with modern C++ and Vulkan. It uses glTF for models and skeletal animations.
+Uldum is a unit-centric game engine inspired by Warcraft III, built with modern C++ and Vulkan. It uses glTF for models and skeletal animations.
 
 Ammunae and Uldum are separate projects with a producer-consumer relationship:
 
@@ -101,15 +101,15 @@ Uldum should not need to know:
 - where its rig or animations originated;
 - which intermediate formats were used.
 
-The Uldum model-format specification is Ammunae's engine-facing compatibility contract. Ammunae is specifically focused on producing models for Uldum rather than becoming a general-purpose asset pipeline.
+The [Ammunae model contract](contracts/model.md) combines Uldum's output constraints with Ammunae's authoring, rig, attachment, and animation-sharing rules. Ammunae is specifically focused on producing models for Uldum rather than becoming a general-purpose asset pipeline.
 
 ## Shared Rigs and Animations
 
 Ammunae should maintain reusable rigs and animation libraries where reuse proves valuable.
 
-Different meshes can share animations when they follow a compatible skeleton contract. Mesh shape, topology, materials, and skin weights may differ; the relevant rig structure must remain compatible.
+Different meshes can share animations when they use the same reusable rig, as defined by the [model contract](contracts/model.md). Mesh shape, topology, materials, and skin weights may differ; joint names and semantics, hierarchy, bind pose, local axes, and scale convention must remain compatible.
 
-The exact contract—including bone naming and hierarchy, bind pose, root-motion policy, attachment points, and acceptable differences in scale or body proportions—will be investigated and documented within the project.
+Ammunae may use several reusable rigs for different body structures and Warcraft III animation sources. Their exact skeleton definitions will be established through animation extraction and retargeting work rather than assumed in advance.
 
 Animations may be:
 

@@ -151,7 +151,7 @@ The tracked repository contains Ammunae itself rather than actual world workspac
 
 Pipeline position is one useful way to organize related work, but it does not imply one directory per stage. For example, if concept-art and model-generation guidance amount to only a few closely related prompts, keeping them together may be clearer than creating separate top-level areas. A stage or concern should receive its own directory only when the amount or kind of material makes that separation useful.
 
-Project-wide contracts and explanations live under `docs/`. The copyable world scaffold lives at `assets/template/`, next to the ignored world workspaces it creates. Other repository directories should be introduced when there is real content to place in them.
+Normative asset contracts live under `contracts/`, while project explanations and workflow documentation live under `docs/`. The copyable world scaffold lives at `assets/template/`, next to the ignored world workspaces it creates. Other repository directories should be introduced when there is real content to place in them.
 
 ## Git Boundary
 
