@@ -1,6 +1,6 @@
 # Ammunae
 
-Ammunae facilitates the creation of **AI-generated, Uldum-compatible 3D models**, from an idea through a validated glTF or GLB asset.
+Ammunae facilitates the creation of **AI-generated assets for Uldum**, including 3D models and unit or ability icons.
 
 The project defines the production pipeline, organizes useful artifacts, maintains reusable resources, and develops tools that make any stage of the process easier or more reliable.
 
@@ -39,7 +39,8 @@ Ammunae is responsible for facilitating the whole idea-to-model process. This in
 - identifying the inputs, outputs, decisions, and validation checks at each stage;
 - prescribing a lightweight workspace for worlds, models, and useful production artifacts;
 - providing reusable prompt fragments and generation guidance;
-- investigating workflows for concept-art and 3D-model generation;
+- investigating workflows for concept-art, 3D-model, and icon generation;
+- supporting unit and ability icon creation;
 - supporting mesh cleanup, face reduction, orientation, scale, topology, UV, texture, and material preparation;
 - defining compatibility contracts for models, skeletons, animations, attachments, and exports;
 - maintaining reusable rigs, animations, templates, and other shared resources;
@@ -57,9 +58,9 @@ This is the current operating model, not a permanent limit. Ammunae should progr
 
 ## Worlds and Model Workspaces
 
-Production assets are divided into **worlds**. A world groups models that share a visual language, such as concept-art direction, mesh design, materials, and texture style. It may also hold prompt fragments and resources useful across its models.
+Production assets are divided into **worlds**. A world groups models and icons that share a visual language, such as concept-art direction, mesh design, materials, textures, and icon style. It may also hold prompt fragments and resources useful across its assets.
 
-Each model has a folder inside its world, but Ammunae does not prescribe that folder's internal structure. Files should be kept when they remain useful, not merely to preserve a complete history. Failed or redundant candidates and model-specific prompts may be discarded.
+Each model has a folder inside its world's `models/` directory, while unit and ability icons belong in the world's `icons/` directory. Ammunae does not prescribe either folder's internal structure. Files should be kept when they remain useful, not merely to preserve a complete history. Failed or redundant candidates and model-specific prompts may be discarded.
 
 When part of a prompt proves reusable, it should be extracted before the model-specific prompt is discarded:
 

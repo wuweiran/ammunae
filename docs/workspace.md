@@ -1,13 +1,13 @@
 # Workspace Contract
 
-This document defines where Ammunae production artifacts and reusable resources belong. It deliberately keeps model workspaces loose: the contract establishes ownership, not a mandatory layout for every tool's output.
+This document defines where Ammunae production artifacts and reusable resources belong. It deliberately keeps model and icon workspaces loose: the contract establishes ownership, not a mandatory layout for every tool's output.
 
 ## Ownership Rule
 
 Keep an artifact at the narrowest level where it is useful:
 
-1. **Model** — useful only while producing one model.
-2. **World** — reusable by multiple models that share one visual language.
+1. **Individual asset** — useful only while producing one model or icon.
+2. **World** — reusable by multiple assets that share one visual language.
 3. **Repository** — world-agnostic and useful across different worlds.
 
 Do not move an artifact to a broader level merely because it might become reusable. Promote it when reuse is demonstrated or its broader value is clear.
@@ -23,13 +23,14 @@ assets/
     shared/
     models/
       <model>/
+    icons/
 ```
 
-Create a world by copying `assets/template/` to `assets/<world>/`. Create a model by adding a folder directly under that world's `models/` directory.
+Create a world by copying `assets/template/` to `assets/<world>/`. Create a model by adding a folder directly under that world's `models/` directory. Keep the world's unit and ability icons in `icons/`.
 
 ### World
 
-A **world** groups models that should share a coherent visual language. This may include:
+A **world** groups models and icons that should share a coherent visual language. This may include:
 
 - concept-art direction;
 - shape and silhouette language;
@@ -38,7 +39,7 @@ A **world** groups models that should share a coherent visual language. This may
 - proportions, color language, or recurring motifs;
 - generation guidance that helps produce that consistency.
 
-A world is an asset-production boundary, not necessarily a gameplay map, story setting, or Uldum package. Use one when its models should look as though they belong together.
+A world is an asset-production boundary, not necessarily a gameplay map, story setting, or Uldum package. Use one when its assets should look as though they belong together.
 
 Everything inside an actual world is local and ignored by Git.
 
@@ -50,7 +51,7 @@ No internal structure or particular file format is required. Organize it further
 
 ### `shared/`
 
-Use `shared/` for concrete resources used by more than one model in the world. A shared rig, animation, mesh part, texture, or material may belong here.
+Use `shared/` for concrete resources used by more than one asset in the world. A shared rig, animation, mesh part, texture, material, or icon source may belong here.
 
 Do not create categories in advance. A resource may remain in a model folder until a second model actually uses it. Model-specific modifications of a shared resource stay with the model unless those modifications also become shared.
 
@@ -73,6 +74,12 @@ A model folder may loosely contain any files that remain useful, including:
 Ammunae does not require subdirectories, a README, a brief, a manifest, a prompt log, or a narrative production record. External tools may create their own structure, and users may add organization when a model becomes complicated enough to need it.
 
 The absence of a mandatory layout does not prohibit useful local organization. It prevents Ammunae from prescribing one before the real pipeline demonstrates a need.
+
+### `icons/`
+
+Keep the world's unit and ability icons in `icons/`. Icons belong at world level because they should share the world's visual language and are not necessarily tied one-to-one to a model.
+
+No unit/ability subdirectories, file naming convention, source/output split, or production record is required yet. Add organization only when the real icon workflow or number of files demonstrates a need.
 
 ## Artifact Retention
 
@@ -99,7 +106,7 @@ This is guidance rather than a deletion requirement. A user may retain anything 
 
 ## Prompt Lifecycle
 
-Prompts used to make one particular model are transient working material. They do not need to become part of the model workspace or production history.
+Prompts used to make one particular model or icon are transient working material. They do not need to become part of the asset workspace or production history.
 
 A typical lifecycle is:
 
@@ -125,10 +132,10 @@ Promote the reusable principle, not necessarily the complete original prompt.
 Artifacts may move outward as their reuse becomes clear:
 
 ```text
-model → world → repository
+individual asset → world → repository
 ```
 
-### Model to world
+### Individual asset to world
 
 Move or copy a resource from `models/<model>/` to `shared/` when multiple models in the same world use it. Put reusable visual or generation guidance in `style/` instead.
 
@@ -154,6 +161,7 @@ Everything directly beneath the top-level `assets/` directory is ignored except 
 - world style guidance and prompt fragments;
 - world-shared rigs or animations;
 - model concept art and generated files;
+- unit and ability icons;
 - exports and other production artifacts.
 
 Copying `assets/template/` to another name beneath `assets/` creates a fully ignored world workspace. This keeps the template close to the workspaces it creates while preventing large, generated, tool-specific, or world-specific files from entering Git accidentally.
