@@ -1,6 +1,10 @@
 # Claude Code
 .claude/
 
+# Python caches
+__pycache__/
+*.py[cod]
+
 # Local world workspaces and production assets
 /assets/*
 !/assets/template/

@@ -19,8 +19,8 @@ Idea
 → concept art
 → generated 3D model
 → mesh and material preparation
-→ rigging and skinning, when needed
-→ animation creation or adoption, when needed
+→ rigging and skinning
+→ animation adoption
 → validation
 → Uldum-compatible glTF or GLB
 ```
@@ -29,7 +29,7 @@ Concept art, generated meshes, prompts, rigs, animations, and other files encoun
 
 A completed model project should produce a validated glTF or GLB model compatible with Uldum. Selected concept art, useful candidates, editable source assets, and other working files may be retained when they continue to have value. Ammunae does not require a complete production history.
 
-Ammunae covers all model categories supported by Uldum's glTF contract. Individual paths through the pipeline may differ for static, skinned, and animated models.
+Ammunae's current model pipeline assumes that every generated model is rigged and animated, including assets such as trees that need only basic motion. The model contract still documents Uldum's broader support for static and skinned models.
 
 ## Responsibilities
 
@@ -69,6 +69,8 @@ When part of a prompt proves reusable, it should be extracted before the model-s
 
 The detailed ownership rules and local layout are defined in [the workspace contract](docs/workspace.md).
 
+The working idea-to-Uldum process is documented in [the model pipeline](docs/model-pipeline.md). It provides instructions for producing a new model while remaining adaptable to the asset's actual needs.
+
 ## Repository and Asset Policy
 
 Actual world workspaces live under `assets/` and remain outside Git. This includes each world's style material, shared resources, models, and production files. The sole tracked exception beneath `assets/` is `assets/template/`, which can be copied to start a world.
@@ -82,6 +84,10 @@ Git tracks only world-agnostic parts of Ammunae, including:
 - reusable resources that are genuinely useful across worlds.
 
 The repository's organization for world-agnostic work should grow from the pipeline and the material that actually exists. It should not create one folder per assumed stage in advance. Small related artifacts may stay together, while substantial areas may receive their own directories when justified. World-specific resources remain with their world even when they are shared by several models.
+
+## Tools
+
+World-agnostic operations that have been validated through production are tracked under [tools](tools/README.md). Current tools cover Blender model auditing and normalization, plus extraction and adoption of Classic Warcraft III rigs and animations. Actual models, converted source data, and world-shared rigs remain in ignored world workspaces.
 
 ## Uldum Compatibility
 

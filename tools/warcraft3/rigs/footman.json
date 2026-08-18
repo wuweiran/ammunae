@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "name": "footman",
+  "rigObject": "footman_rig",
+  "source": {
+    "referenceAnimation": "Stand - 1",
+    "referenceOffsetMs": 167,
+    "forward": "+X",
+    "up": "+Z"
+  },
+  "target": {
+    "forward": "-Y",
+    "up": "+Z",
+    "height": 64.0,
+    "rootBone": "Bone_Root",
+    "maxJoints": 128
+  },
+  "hierarchy": "nearestSelectedParent",
+  "nodes": [
+    { "source": "Bone_Root", "deform": true },
+    { "source": "Bone_Pelvis", "deform": true },
+    { "source": "Bone_Leg1_L", "deform": true },
+    { "source": "Bone_Leg2_L", "deform": true },
+    { "source": "Bone_Foot_L", "deform": true },
+    { "source": "Bone_Leg1_R", "deform": true },
+    { "source": "Bone_Leg2_R", "deform": true },
+    { "source": "Bone_Foot_R", "deform": true },
+    { "source": "Bone_Chest", "deform": true },
+    { "source": "Bone_Arm1_R", "deform": true },
+    { "source": "Bone_Arm2_R", "deform": true },
+    { "source": "Bone_Arm1_L", "deform": true },
+    { "source": "Bone_Arm2_L", "deform": true },
+    { "source": "Bone_Hand_R", "deform": true },
+    { "source": "Bone_Head", "deform": true },
+    { "source": "Box04", "deform": true },
+    { "source": "handle", "deform": true },
+    { "source": "Cone11", "deform": true },
+    { "source": "Origin Ref", "target": "origin", "deform": false },
+    { "source": "Chest Ref", "target": "chest", "deform": false },
+    { "source": "OverHead Ref", "target": "overhead", "deform": false },
+    { "source": "Hand Right Ref", "target": "right_hand", "deform": false },
+    { "source": "Hand Left Ref", "target": "left_hand", "deform": false }
+  ],
+  "displayTailChildren": {
+    "Bone_Root": "Bone_Chest",
+    "Bone_Pelvis": "Bone_Leg1_L",
+    "Bone_Leg1_L": "Bone_Leg2_L",
+    "Bone_Leg2_L": "Bone_Foot_L",
+    "Bone_Leg1_R": "Bone_Leg2_R",
+    "Bone_Leg2_R": "Bone_Foot_R",
+    "Bone_Chest": "Bone_Head",
+    "Bone_Arm1_R": "Bone_Arm2_R",
+    "Bone_Arm2_R": "right_hand",
+    "Bone_Arm1_L": "Bone_Arm2_L",
+    "Bone_Arm2_L": "Bone_Hand_R",
+    "Bone_Hand_R": "left_hand"
+  },
+  "inPlace": {
+    "lockPlanarTranslation": true,
+    "removeFacingYaw": true,
+    "preserveVerticalTranslation": true
+  },
+  "actions": [
+    { "source": "Stand - 1", "target": "idle", "loop": true, "phaseFromReference": true },
+    { "source": "Stand - 2", "target": "idle_2", "loop": true },
+    { "source": "Walk", "target": "walk", "loop": true },
+    { "source": "Attack - 1", "target": "attack", "loop": false },
+    { "source": "Attack - 2", "target": "attack_2", "loop": false },
+    { "source": "Death", "target": "death", "loop": false }
+  ]
+}
